@@ -4,12 +4,12 @@
     "description": "Valora API - Simple and easy to use REST API.",
     "license": "MIT",
     "type": "module",
-    "main": "src/index.js",
+    "main": "src/index.ts",
     "scripts": {
         "dev": "node node_modules/next/dist/bin/next dev --webpack -H 0.0.0.0 -p 3000",
         "build": "node node_modules/next/dist/bin/next build --webpack",
         "start": "node node_modules/next/dist/bin/next start -H 0.0.0.0 -p 3000",
-        "start:node": "node src/index.js"
+        "start:node": "node --experimental-strip-types src/index.ts"
     },
     "dependencies": {
         "@hono/node-server": "1.19.9",
@@ -19,5 +19,11 @@
         "react": "^19.2.8",
         "react-dom": "^19.2.8",
         "zod": "^4.3.6"
+    },
+    "devDependencies": {
+        "typescript": "^5.7.3",
+        "@types/node": "^22.10.5",
+        "@types/react": "^19.0.2",
+        "@types/react-dom": "^19.0.2"
     }
 }
