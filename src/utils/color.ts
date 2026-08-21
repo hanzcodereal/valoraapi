@@ -1,30 +1,39 @@
-const colors = {
-    reset: [0, 0],
-    bold: [1, 22],
-    dim: [2, 22],
-    italic: [3, 23],
-    underline: [4, 24],
-    color: {
-        black: [30, 39],
-        red: [31, 39],
-        green: [32, 39],
-        yellow: [33, 39],
-        blue: [34, 39],
-        magenta: [35, 39],
-        cyan: [36, 39],
-        white: [37, 39],
-        gray: [90, 39],
-    },
+type ColorFn = (text: string | number) => string
+
+const wrap = (start: number, end: number): ColorFn => (text) => `\x1b[${start}m${text}\x1b[${end}m`
+
+interface ColorApi {
+    reset: ColorFn
+    bold: ColorFn
+    dim: ColorFn
+    italic: ColorFn
+    underline: ColorFn
+    black: ColorFn
+    red: ColorFn
+    green: ColorFn
+    yellow: ColorFn
+    blue: ColorFn
+    magenta: ColorFn
+    cyan: ColorFn
+    white: ColorFn
+    gray: ColorFn
 }
 
-const Color = {}
-
-Object.keys(colors.color).forEach((name) => {
-    const [start, end] = colors.color[name]
-    Color[name] = (text) => `\x1b[${start}m${text}\x1b[${end}m`
-})
-
-Color.bold = (text) => `\x1b[${colors.bold[0]}m${text}\x1b[${colors.bold[1]}m`
-Color.dim = (text) => `\x1b[${colors.dim[0]}m${text}\x1b[${colors.dim[1]}m`
+const Color: ColorApi = {
+    reset: wrap(0, 0),
+    bold: wrap(1, 22),
+    dim: wrap(2, 22),
+    italic: wrap(3, 23),
+    underline: wrap(4, 24),
+    black: wrap(30, 39),
+    red: wrap(31, 39),
+    green: wrap(32, 39),
+    yellow: wrap(33, 39),
+    blue: wrap(34, 39),
+    magenta: wrap(35, 39),
+    cyan: wrap(36, 39),
+    white: wrap(37, 39),
+    gray: wrap(90, 39),
+}
 
 export default Color
